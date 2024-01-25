@@ -19,11 +19,16 @@ app.use('/api',UserRoutes);
 app.use('/api',LogRoutes);
 app.use('/api',ProductRoutes);
 
-mongoose.connect('mongodb+srv://ReactApp:ReactApp@reactapp.h3oylgt.mongodb.net', { useNewUrlParser: true, useUnifiedTopology: true }).then((res) => {
-    console.log('Connected to MongoDB');
-    app.listen(3000, () => {
-        console.log('Running on port 3000!');
+mongoose.connect('mongodb://admin:admin_password@mongo/mydatabase?authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((res) => {
+         
+        console.log('Connected to MongoDB');
+        app.listen(3000, () => {
+            console.log('Running on port 3000!');
+        });
+    })
+    .catch((err) => {
+        console.log("hello");
+        console.log(err);
     });
-}).catch((err) => {
-    console.log(err);
-});
+

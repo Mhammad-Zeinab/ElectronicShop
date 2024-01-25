@@ -1,0 +1,30 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./Server  
+      dockerfile: Dockerfile
+    networks:
+      - electronicshop_default
+    ports:
+      - "3001:3000"
+    environment:
+      - JWT_SECRET=9694f83d2f7c4f916ba19d47e44e0fe088b23f36265a4accefc828f9807b319a
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin_password
+      - MONGO_INITDB_DATABASE=mydatabase
+    volumes:
+    - mongo-data:/data/db
+    networks :
+        - electronicshop_default
+volumes:
+  mongo-data:
+networks:
+  electronicshop_default:  
